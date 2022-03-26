@@ -1,0 +1,24 @@
+{
+  "products": [
+    {
+      "id": 3,
+      "name": "Sản phẩm 3",
+      "price": 100,
+      "img": "https://img.websosanh.vn/v2/users/review/images/4wvuq0i4ozs1q.jpg?compress=85"
+    },
+    {
+      "id": 4,
+      "name": "Sản phẩm 4",
+      "price": 100,
+      "img": "https://img.websosanh.vn/v2/users/review/images/4wvuq0i4ozs1q.jpg?compress=85"
+    },
+    {
+      "name": "Sản phẩm 7 update",
+      "price": "100",
+      "img": "https://img.websosanh.vn/v2/users/review/images/4wvuq0i4ozs1q.jpg?compress=85",
+      "id": 5
+    }
+  ],
+  "categories": [],
+  "users": []
+}

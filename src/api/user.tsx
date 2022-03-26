@@ -1,0 +1,15 @@
+import instance from "./instance";
+
+
+export const signin = (user: any) => {
+    const url = "/signin";
+    return instance.post(url, user);
+};
+export const signup = (user: any) => {
+    const url = `/signup`;
+    return instance.post(url, user);
+}
+export const getUser = (email: any) => {
+    const url = `/user/${email}`;
+    return instance.get(url);
+}
