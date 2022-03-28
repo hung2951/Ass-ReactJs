@@ -4,7 +4,7 @@ import { ProductType } from '../../types/product'
 
 type ProductManagerProps = {
     products: ProductType[];
-    onRemove: (id: number) => void
+    onRemove: (_id: number) => void
 }
 
 const ProductManager = ({ products, onRemove }: ProductManagerProps) => {
@@ -27,9 +27,11 @@ const ProductManager = ({ products, onRemove }: ProductManagerProps) => {
                                 <td className="flex">{item.name} <img src={item.img} alt="" width={100} /></td>
                                 <td>{item.price}</td>
                                 <td>
-                                    <Link to={`/admin/product/edit/${item.id}`}>Edit</Link>
-                                    <button onClick={() => onRemove(item.id)}>Remove</button>
+                                    <Link to={`/admin/product/edit/${item._id}`}>Edit</Link>
+                                    <button onClick={() => onRemove(item._id)}>Remove</button>
                                 </td>
+
+
                             </tr>
                         )
                     })}

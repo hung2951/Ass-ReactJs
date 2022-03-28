@@ -1,3 +1,101 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+header{
+    @apply mt-2;
+}
+.menu ul{
+    @apply flex;
+}
+footer h3{
+    @apply uppercase text-lg font-bold ;
+}
+#border{
+    @apply w-4/12  border-b mb-5 mt-1;
+}
+footer div{
+    @apply text-sm;
+}
+#phone{
+    @apply font-bold hover:text-[#0b8c5d] hover:duration-500;
+}
+.info-sp p{
+    @apply hover:text-[#0b8c5d] hover:duration-500 leading-7;
+}
+.address{
+    @apply pr-5
+}
+.address p{
+    @apply leading-7;
+}
+.nav-bar{
+    @apply text-center group-hover:text-[#00ccaa] uppercase inline-block;
+}
+.menu-item{
+    @apply text-black pl-5 pt-5;
+}
+.menu-item-title{
+    @apply font-bold text-base pb-4;
+}
+.menu-item-info li a{
+    @apply hover:text-[#002c25] hover:text-base hover:font-bold duration-200;
+}
+.apple-product-item-img{
+    @apply overflow-hidden;
+}
+.apple-product-item-img img{
+    @apply group-hover:scale-105 group-hover:duration-500;
+}
+.apple-title, .accessory-title{
+    @apply uppercase pl-5 mt-10 mb-5 text-white bg-[#00483d] h-10 leading-10 text-xl rounded-lg;
+}
+.product-sale-item-title a p{
+    @apply hover:text-[#0041cc] px-2 pb-2 font-bold;
+}
+.accessory-item-name{
+    @apply text-sm group-hover:text-[#0b8c5d];
+}
+.accessory-item-icon{
+    @apply text-[#002c25e0] border border-transparent bg-[#ececec] rounded-lg mb-2 group-hover:bg-white group-hover:border group-hover:border-[#0b8c5d];
+}
+.accessory-item-icon i{
+    @apply py-5;
+}
+
+.category{
+    @apply mx-20 max-w-xl
+}
+.category form button,.btn-formCates{
+    @apply bg-[#111b27] text-white w-1/5 h-10 border-4 bg-opacity-50 border-gray-600
+}
+.category form input{
+    @apply h-10 pl-3 rounded-sm w-4/5
+}
+
+#name,#price,#img, #formAddProduct select,#formEditProduct select{
+    @apply block border border-black pl-3 my-2 w-2/4 rounded-sm h-10;
+}
+#formAddProduct button,#formEditProduct button{
+    @apply bg-black text-white w-32 h-10 border-4 border-gray-600 hover:border-black hover:bg-gray-600 transition-all
+}
+#formAddProduct-img,#formEditProduct-img{
+    @apply flex border-none py-5
+}
+#formAddProduct-img input,#formEditProduct-img input{
+    @apply border-none
+}
+#productHot{
+    @apply w-5 mr-5 my-5 h-5
+}
+#checkName,#checkPrice,#checkImg{
+    @apply text-red-600 text-sm
+}
+.cart{
+    @apply w-[1200px]  mx-auto bg-white text-center rounded-md px-5
+}
+.cart th, td{
+    @apply border-b border-black py-4
+}
+.cart tfoot td{
+    @apply border-none text-center
+}

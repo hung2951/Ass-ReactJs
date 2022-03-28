@@ -20,14 +20,14 @@ function App() {
   useEffect(() => {
     const getProduct = async () => {
       const { data } = await list();
-      setProducts(data)
-
+      console.log(data);
+      setProducts(data);
     }
     getProduct();
   }, [])
   const onHandleRemove = (id: number) => {
     remove(id);
-    setProducts(products.filter(item => item.id != id))
+    setProducts(products.filter(item => item._id != id))
   }
   const onHandleAdd = async (product: any) => {
     const { data } = await create(product);
@@ -35,7 +35,7 @@ function App() {
   }
   const onHandleEdit = async (product: ProductType) => {
     const { data } = await update(product);
-    setProducts(products.map(item => item.id === data.id ? product : item))
+    setProducts(products.map(item => item._id === data._id ? product : item))
   }
   return (
     <div className="App">

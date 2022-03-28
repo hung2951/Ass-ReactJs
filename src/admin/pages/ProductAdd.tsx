@@ -9,7 +9,9 @@ type ProductAddProps = {
 type FormInputs = {
     name: string,
     price: number,
-    img: string
+    img: string,
+    category: string,
+    desc: string
 }
 const ProductAdd = (props: ProductAddProps) => {
     const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
@@ -35,6 +37,16 @@ const ProductAdd = (props: ProductAddProps) => {
             <div className="mb-3">
                 <label htmlFor="price" className="form-label">Ảnh</label>
                 <input type="text" {...register('img', { required: true })} className="form-control" id="exampleInputPassword1" />
+                {errors.img && <div id="emailHelp" className="form-text">Không được để trống!</div>}
+            </div>
+            <div className="mb-3">
+                <label htmlFor="price" className="form-label">Danh mục</label>
+                <input type="text" {...register('category', { required: true })} className="form-control" id="exampleInputPassword1" />
+                {errors.img && <div id="emailHelp" className="form-text">Không được để trống!</div>}
+            </div>
+            <div className="mb-3">
+                <label htmlFor="price" className="form-label">Mô tả</label>
+                <input type="text" {...register('desc', { required: true })} className="form-control" id="exampleInputPassword1" />
                 {errors.img && <div id="emailHelp" className="form-text">Không được để trống!</div>}
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>

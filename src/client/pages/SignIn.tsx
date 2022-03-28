@@ -1,6 +1,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { getUser, signin } from '../../api/user'
+import { addLocalstorage } from '../../ultils/localStorage'
 
 type Props = {}
 type FormInputs = {
@@ -9,39 +10,69 @@ type FormInputs = {
 }
 const SignIn = (props: Props) => {
     const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
-    const navigate = useNavigate()
-    const onSubmit: SubmitHandler<FormInputs> = (data) => {
-        signin(data)
-            .then(res => {
-                const user = getUser(data.email);
-                console.log(user);
-                // localStorage.setItem('user', JSON.stringify(user));
-            })
-            .catch(res => {
-                window.alert("Tài khoản mật khẩu không chính xác")
-            })
+    const navigate = useNavigate();
+    const onSubmit: SubmitHandler<FormInputs> = async data => {
+        const { data: user } = await signin(data);
+        console.log(user);
+        addLocalstorage(user, () => {
+            navigate('/')
+        })
 
     }
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <h2 className='text-center mt-5'>Đăng nhập</h2>
-            <div className="mb-3">
-                <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                <input type="email" {...register('email', { required: true })} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                {errors.email && <div id="emailHelp" className="form-text">Vui lòng nhập tài khoản!</div>}
+        <div className="bg-[url('https://stockdep.net/files/images/31496568.jpg')]">
+            <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 ">
+                {/* Replace with your content */}
+                <div className="px-4 pt-6 sm:px-0">
+                    <div className="min-h-full grid grid-cols-2 px-4 sm:px-6 lg:px-8">
+                        <div>
+                            <img src="https://picsum.photos/700/800" />
+                        </div>
+                        <div className="w-full space-y-8 bg-white bg-opacity-50">
+                            <form className="max-w-sm space-y-6 mx-auto pt-20 " onSubmit={handleSubmit(onSubmit)}>
+                                <div className="rounded-md shadow-sm -space-y-px">
+                                    <div className="text-center text-2xl font-bold">
+                                        Đăng nhập
+                                    </div>
+                                    <div>
+                                        <label htmlFor="email" className="pl-1 font-bold text-[#1a1a1a]">Địa chỉ email:</label>
+                                        <input id="email" {...register('email')} name="email" type="email" className="border border-[#ccc] block w-full pl-2 h-10 rounded-sm my-2" placeholder="Địa chỉ email" />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="password" className="pl-1 font-bold text-[#1a1a1a]">Mật khẩu:</label>
+                                        <input id="password" {...register('password')} name="password" type="password" className="border border-[#ccc] block w-full pl-2 h-10 rounded-sm my-2" placeholder="Mật khẩu" />
+                                    </div>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center">
+                                        <input id="remember-me" name="remember-me" type="checkbox" className="h-4 w-4 text-[#075549] focus:ring-[#075549] border-gray-300 rounded" />
+                                        <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                                            Nhớ mật khẩu
+                                        </label>
+                                    </div>
+                                    <div className="text-sm">
+                                        <a href="forgotpass" className="font-medium text-[#092521] hover:text-[#075549]">
+                                            Quên mật khẩu?
+                                        </a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p id="checkUser" className="text-red-600 mb-5 mt-0" />
+                                    <button className="mt-5 bg-[#111b27] text-white w-40 h-10 border-4 bg-opacity-80 border-white">
+                                        Đăng nhập
+                                    </button>
+                                    <div className="text-center pt-5">
+                                        <p>Bạn chưa có tài khoản?<Link to="/signup" className="text-[#075549]"> Đăng ký</Link></p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    {/* /End replace */}
+                </div>
             </div>
-            <div className="mb-3">
-                <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                <input type="password" {...register('password', { required: true })} className="form-control" id="exampleInputPassword1" />
-                {errors.password && <div id="emailHelp" className="form-text">Vui lòng nhập mật khẩu!</div>}
-            </div>
-            <div className='checkUser'></div>
-            <div className="mb-3 form-check">
-                <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" className="btn btn-primary">Login</button>
-        </form>
+        </div>
+
 
     )
 }

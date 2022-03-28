@@ -7,7 +7,7 @@ type Props = {}
 
 const Client = (props: Props) => {
     return (
-        <div className='container'>
+        <div className=''>
             <Header />
             <main>
                 <Outlet />

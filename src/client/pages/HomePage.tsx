@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { ProductType } from '../../types/product'
 
@@ -9,7 +8,7 @@ type HomePageProps = {
 const HomePage = ({ products }: HomePageProps) => {
     return (
         <div>
-            <div className="bg-red">hi</div>
+            <div className="">hi</div>
             <div className="row">
                 <div className="banner">
                     <img src="https://caodang.fpt.edu.vn/wp-content/uploads/Banner1-1.png" width={1200} />
@@ -17,7 +16,7 @@ const HomePage = ({ products }: HomePageProps) => {
                 {products?.map((product, index) => {
                     return (
                         <div className="col-3 mt-2" key={index}>
-                            <Link to={`/product/${product.id}`}>
+                            <Link to={`/product/${product._id}`}>
                                 <div className="card" >
                                     <img src={product.img} className="card-img-top mt-3" alt="..." />
                                     <div className="card-body">

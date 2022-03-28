@@ -1,14 +1,15 @@
-import React from 'react'
-import { Navigate } from 'react-router-dom';
 
+import { Navigate } from 'react-router-dom';
+import { getLocalstorage } from '../../ultils/localStorage'
 type PrivateRouteProps = {
     children: JSX.Element;
 }
 
 const PrivateRoute = (props: PrivateRouteProps) => {
-    const checkAuth = false;
-    if (!checkAuth) {
-        return <Navigate to='/login' />
+    const { user: { role } } = getLocalstorage();
+    if (!role) {
+        window.alert("Bạn không có quyền truy cập!")
+        return <Navigate to='/' />
     }
     return props.children;
 }

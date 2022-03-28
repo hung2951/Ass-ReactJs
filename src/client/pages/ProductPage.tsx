@@ -14,7 +14,7 @@ const ProductPage = ({ products }: ProductPageProps) => {
                 {products?.map((product, index) => {
                     return (
                         <div className="col-3 mt-2" key={index}>
-                            <Link to={`/product/${product.id}`}>
+                            <Link to={`/product/${product._id}`}>
                                 <div className="card" >
 
                                     <img src={product.img} className="card-img-top mt-3" alt="..." />
