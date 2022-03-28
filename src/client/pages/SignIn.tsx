@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { getUser, signin } from '../../api/user'
-import { addLocalstorage } from '../../ultils/localStorage'
+import { addLocalstorage, getLocalstorage } from '../../ultils/localStorage'
 
 type Props = {}
 type FormInputs = {
@@ -15,7 +15,8 @@ const SignIn = (props: Props) => {
         const { data: user } = await signin(data);
         console.log(user);
         addLocalstorage(user, () => {
-            navigate('/')
+            if (getLocalstorage().user.role == 1) navigate('/admin')
+            else window.location.href = ('/')
         })
 
     }

@@ -24,7 +24,7 @@ const ProductManager = ({ products, onRemove }: ProductManagerProps) => {
                         return (
                             <tr key={index}>
                                 <th scope="row">{index + 1}</th>
-                                <td className="flex">{item.name} <img src={item.img} alt="" width={100} /></td>
+                                <td className="flex"> <img src={item.img} alt="" width={100} />{item.name}</td>
                                 <td>{item.price}</td>
                                 <td>
                                     <Link to={`/admin/product/edit/${item._id}`}>Edit</Link>

@@ -9,7 +9,7 @@ const Client = (props: Props) => {
     return (
         <div className=''>
             <Header />
-            <main>
+            <main className='w-[1200px] mx-auto'>
                 <Outlet />
             </main>
             <Footer />

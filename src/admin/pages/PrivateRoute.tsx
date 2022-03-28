@@ -1,4 +1,3 @@
-
 import { Navigate } from 'react-router-dom';
 import { getLocalstorage } from '../../ultils/localStorage'
 type PrivateRouteProps = {
@@ -6,8 +5,13 @@ type PrivateRouteProps = {
 }
 
 const PrivateRoute = (props: PrivateRouteProps) => {
-    const { user: { role } } = getLocalstorage();
-    if (!role) {
+    if (getLocalstorage()) {
+        const { user: { role } } = getLocalstorage();
+        if (!role) {
+            window.alert("Bạn không có quyền truy cập!")
+            return <Navigate to='/' />
+        }
+    } else {
         window.alert("Bạn không có quyền truy cập!")
         return <Navigate to='/' />
     }

@@ -1,8 +1,10 @@
 import { ProductType } from "../types/product";
 import instance from "./instance";
 import { getLocalstorage } from '../ultils/localStorage';
-const { token, user } = getLocalstorage()
+
+
 export const create = (product: ProductType) => {
+    const { token, user } = getLocalstorage()
     const url = `/api/products/${user._id}`;
     return instance.post(url, product, {
         headers: {
