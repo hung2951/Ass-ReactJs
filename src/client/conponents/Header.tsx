@@ -3,6 +3,7 @@ import FormSearch from './FormSearch'
 import Logo from './Logo'
 import NavBar from './NavBar'
 import { getLocalstorage } from '../../ultils/localStorage'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 type Props = {}
 
 const Header = (props: Props) => {
@@ -29,19 +30,25 @@ const Header = (props: Props) => {
                     {getLocalstorage() ?
                         <div>
                             {getLocalstorage().user.role == 1 ?
-                                <Link to="/admin" className=' no-underline'>
-                                    <div className='group text-white leading-3'>
+                                <div>
+                                    <Link to="/admin" className='text-white no-underline leading-3'>
                                         <p className="text-center"><i className="fas fa-user-circle fa-2x" /></p>
-                                        <p className="text-center hover:text-[#39ebd07a] duration-300">{getLocalstorage().user.name}</p>
-                                        <div className=' opacity-0 group-hover:opacity-100'>
-                                            <p>Đăng xuất</p>
+                                        <div>
+                                            <p className="text-center hover:text-[#39ebd07a] duration-300">{getLocalstorage().user.name}</p>
                                         </div>
-                                    </div>
-                                </Link>
-                                : <Link to="/" className='text-white no-underline leading-3'>
-                                    <p className="text-center"><i className="fas fa-user-circle fa-2x" /></p>
-                                    <p className="text-center hover:text-[#39ebd07a] duration-300">{getLocalstorage().user.name}</p>
-                                </Link>
+                                    </Link>
+                                    <p className='opacity-0 hover:opacity-100 hover:bg-white hover:text-white'>Đăng xuất</p>
+                                </div>
+                                : <div>
+                                    <Link to="/" className='text-white no-underline leading-3'>
+                                        <p className="text-center"><i className="fas fa-user-circle fa-2x" /></p>
+                                        <div>
+                                            <p className="text-center hover:text-[#39ebd07a] duration-300">{getLocalstorage().user.name}</p>
+                                        </div>
+                                    </Link>
+                                    <p className='opacity-0 hover:opacity-100'>Đăng xuất</p>
+                                </div>
+
                             }
                         </div>
                         : <Link to="/login" className='text-white no-underline leading-3'>
@@ -53,7 +60,7 @@ const Header = (props: Props) => {
                 </div>
             </div>
             <NavBar />
-        </div>
+        </div >
 
     )
 }

@@ -15,15 +15,24 @@ import ProductDetail from './client/pages/ProductDetail'
 import PrivateRoute from './admin/pages/PrivateRoute'
 import SignIn from './client/pages/SignIn'
 import SignUp from './client/pages/SignUp'
+import Category from './admin/pages/Category'
+import { listCate } from './api/category'
 function App() {
-  const [products, setProducts] = useState<ProductType[]>([])
+  const [products, setProducts] = useState<ProductType[]>([]);
+  const [categories, setCategories] = useState<ProductType[]>([]);
   useEffect(() => {
+    // sản phẩm
     const getProduct = async () => {
       const { data } = await list();
-      console.log(data);
       setProducts(data);
     }
     getProduct();
+    // danh mục
+    const getCategory = async () => {
+      const { data } = await listCate();
+      setCategories(data)
+    }
+    getCategory()
   }, [])
   const onHandleRemove = (id: number) => {
     remove(id);
@@ -41,20 +50,24 @@ function App() {
     <div className="App">
       <Routes>
         <Route path='/' element={<Client />}>
-          <Route index element={<HomePage products={products} />} />
+          <Route index element={<HomePage products={products} categories={categories} />} />
           <Route path='product'>
             <Route index element={<ProductPage products={products} />} />
             <Route path=':id' element={<ProductDetail />} />
           </Route>
-          <Route path='login' element={<SignIn />} />
-          <Route path='signUp' element={<SignUp />} />
+
         </Route>
+        <Route path='login' element={<SignIn />} />
+        <Route path='signUp' element={<SignUp />} />
         <Route path='admin' element={<PrivateRoute><Admin /></PrivateRoute>}>
           <Route index element={<DashBoard />} />
           <Route path='product'>
             <Route index element={<ProductManager products={products} onRemove={onHandleRemove} />} />
             <Route path='add' element={<ProductAdd onAdd={onHandleAdd} />} />
             <Route path='edit/:id' element={<ProductEdit onEdit={onHandleEdit} />} />
+          </Route>
+          <Route path='category'>
+            <Route index element={<Category />} />
           </Route>
         </Route>
 

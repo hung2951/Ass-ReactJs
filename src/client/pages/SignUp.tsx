@@ -2,7 +2,8 @@ import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { signup } from '../../api/user'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 type Props = {}
 type FormInputs = {
     name: string,
@@ -18,10 +19,13 @@ const SignUp = (props: Props) => {
 
         signup(data)
             .then(res => {
-                window.alert("Đăng ký thành công");
-                navigate('/login')
+                toast.success("Đăng ký thành công, vui lòng đợi vài giây!");
+                setTimeout(function () {
+                    navigate('/login')
+                }, 2000)
+
             })
-            .catch(res => window.alert("tài khoản đã tồn tại!"))
+            .catch(res => toast.error("Tài khoản đã tồn tại!"))
     }
     return (
         <div className="bg-[url('https://stockdep.net/files/images/31496568.jpg')]">
@@ -74,6 +78,7 @@ const SignUp = (props: Props) => {
                     {/* /End replace */}
                 </div>
             </div>
+            <ToastContainer />
         </div>
 
 

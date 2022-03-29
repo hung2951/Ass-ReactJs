@@ -2,7 +2,8 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { getUser, signin } from '../../api/user'
 import { addLocalstorage, getLocalstorage } from '../../ultils/localStorage'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 type Props = {}
 type FormInputs = {
     email: string,
@@ -12,12 +13,27 @@ const SignIn = (props: Props) => {
     const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
     const navigate = useNavigate();
     const onSubmit: SubmitHandler<FormInputs> = async data => {
-        const { data: user } = await signin(data);
-        console.log(user);
-        addLocalstorage(user, () => {
-            if (getLocalstorage().user.role == 1) navigate('/admin')
-            else window.location.href = ('/')
-        })
+
+        try {
+            const { data: user } = await signin(data)
+            addLocalstorage(user, () => {
+                if (getLocalstorage().user.role == 1) {
+                    toast.success("Đăng nhập thành công");
+                    setTimeout(function () {
+                        navigate('/admin')
+                    }, 2000)
+                }
+                else {
+                    toast.success("Đăng nhập thành công");
+                    setTimeout(function () {
+                        navigate('/')
+                    }, 2000)
+                }
+            })
+        } catch (error) {
+            toast.error("Tài khoản hoặc mật khẩu không chính xác!")
+
+        }
 
     }
     return (
@@ -72,9 +88,8 @@ const SignIn = (props: Props) => {
                     {/* /End replace */}
                 </div>
             </div>
+            <ToastContainer />
         </div>
-
-
     )
 }
 
