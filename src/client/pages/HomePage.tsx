@@ -3,7 +3,7 @@ import { CategoryType } from '../../types/category'
 import { ProductType } from '../../types/product'
 import Category from '../conponents/Category'
 import SlideShow from '../conponents/SlideShow'
-
+import { formatPrice } from '../../ultils/FormatPrice'
 type HomePageProps = {
     products: ProductType[],
     categories: CategoryType[]
@@ -21,13 +21,13 @@ const HomePage = (props: HomePageProps) => {
                 <div className='grid grid-cols-3 mt-2 gap-4'>
                     {props.products?.map((product, index) => {
                         return (
-                            <div className="" key={index}>
+                            <div className="group " key={index}>
                                 <Link to={`/product/${product._id}`} className="no-underline">
-                                    <div className="card" >
-                                        <img src={product.img} className="card-img-top mt-3" alt="..." />
-                                        <div className="card-body">
-                                            <h5 className="card-title">{product.name}</h5>
-                                            <p className="card-text">{product.price}</p>
+                                    <div className="card overflow-hidden" >
+                                        <img src={product.img} className="card-img-top mt-3 group-hover:scale-105 duration-300" alt="..." />
+                                        <div className="card-body text-center">
+                                            <h5 className="card-title text-lg text-black">{product.name}</h5>
+                                            <p className="card-text text-xl text-red-600 font-bold"> {formatPrice(`${product.price}`)} <u>đ</u></p>
                                         </div>
                                     </div>
                                 </Link>

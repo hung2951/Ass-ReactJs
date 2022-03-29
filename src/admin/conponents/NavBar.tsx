@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 type Props = {}
 
@@ -7,9 +7,9 @@ const NavBar = (props: Props) => {
     return (
         <aside className="z-20 flex-shrink-0 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block">
             <div className="py-4 text-gray-500 dark:text-gray-400">
-                <div>
+                <Link to="/">
                     <img className='mx-auto mb-5' src="http://static.ybox.vn/2020/2/0/1582473564897-Poly.png" width="150px" />
-                </div>
+                </Link>
                 <ul className="pt-10">
                     <li className="relative px-6">
                         <NavLink to="/admin/" className={({ isActive }) => (isActive ? "text-blue-700 no-underline" : "no-underline text-black")}>

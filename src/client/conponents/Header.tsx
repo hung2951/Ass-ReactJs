@@ -37,7 +37,9 @@ const Header = (props: Props) => {
                                             <p className="text-center hover:text-[#39ebd07a] duration-300">{getLocalstorage().user.name}</p>
                                         </div>
                                     </Link>
-                                    <p className='opacity-0 hover:opacity-100 hover:bg-white hover:text-white'>Đăng xuất</p>
+                                    <Link to="">
+                                        <p className='text-base'>Đăng xuất</p>
+                                    </Link>
                                 </div>
                                 : <div>
                                     <Link to="/" className='text-white no-underline leading-3'>
@@ -46,7 +48,7 @@ const Header = (props: Props) => {
                                             <p className="text-center hover:text-[#39ebd07a] duration-300">{getLocalstorage().user.name}</p>
                                         </div>
                                     </Link>
-                                    <p className='opacity-0 hover:opacity-100'>Đăng xuất</p>
+                                    <p className=''>Đăng xuất</p>
                                 </div>
 
                             }
