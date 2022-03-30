@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { ProductType } from '../../types/product'
+import { formatPrice } from '../../ultils/FormatPrice'
 
 type ProductManagerProps = {
     products: ProductType[];
@@ -28,13 +29,11 @@ const ProductManager = ({ products, onRemove }: ProductManagerProps) => {
                             <tr key={index}>
                                 <th scope="row">{index + 1}</th>
                                 <td className="flex"> <img src={item.img} alt="" width={100} />{item.name}</td>
-                                <td>{item.price}</td>
+                                <td className='text-red-700'>{formatPrice(`${item.price}`)} <u>đ</u></td>
                                 <td>
-                                    <Link to={`/admin/product/edit/${item._id}`}>Edit</Link>
-                                    <button onClick={() => onRemove(item._id)}>Remove</button>
+                                    <Link to={`/admin/product/edit/${item._id}`} className='px-3 no-underline text-blue-600 hover:text-blue-900'>Edit</Link>
+                                    <button onClick={() => onRemove(item._id)} className='text-red-600 hover:text-red-800'>Remove</button>
                                 </td>
-
-
                             </tr>
                         )
                     })}

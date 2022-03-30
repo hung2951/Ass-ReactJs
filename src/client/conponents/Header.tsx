@@ -3,13 +3,15 @@ import FormSearch from './FormSearch'
 import Logo from './Logo'
 import NavBar from './NavBar'
 import { getLocalstorage } from '../../ultils/localStorage'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 type Props = {}
 
 const Header = (props: Props) => {
     const navigate = useNavigate()
     const logOut = () => {
         localStorage.removeItem('user');
-        navigate('/')
+        toast.success("Đã đăng xuất");
     }
     return (
         <div className="bg-[#5a5a5a]">
@@ -40,7 +42,7 @@ const Header = (props: Props) => {
                                         <Link to="#" onClick={() => logOut()}>Đăng xuất</Link>
                                     </div>
                                 </div>
-                                : <div className="dropdown">
+                                : <div className="dropdown duration-300">
                                     <button className="dropbtn"><i className="fas fa-user-circle fa-2x" /><p>{getLocalstorage().user.name}</p></button>
                                     <div className="dropdown-content">
                                         <Link to="#" onClick={() => logOut()}>Đăng xuất</Link>
@@ -58,6 +60,7 @@ const Header = (props: Props) => {
                 </div>
             </div>
             <NavBar />
+            <ToastContainer />
         </div >
 
     )

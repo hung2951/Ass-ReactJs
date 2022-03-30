@@ -1,10 +1,11 @@
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { CategoryType } from '../../types/category'
 import { ProductType } from '../../types/product'
-
 type ProductAddProps = {
-    onAdd: (product: ProductType) => void
+    onAdd: (product: ProductType) => void,
+    categories: CategoryType[],
 }
 type FormInputs = {
     name: string,
@@ -43,13 +44,15 @@ const ProductAdd = (props: ProductAddProps) => {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="price" className="form-label">Danh mục</label>
-                    <input type="text" {...register('category', { required: true })} className="form-control" id="exampleInputPassword1" />
-                    {errors.img && <div id="emailHelp" className="form-text">Không được để trống!</div>}
+                    <select {...register('category')} className='w-full border border-black rounded-md h-10'>
+                        {props.categories?.map(item => <option value={item._id}>{item.name}</option>)}
+                    </select>
                 </div>
+
                 <div className="mb-3">
                     <label htmlFor="price" className="form-label">Mô tả</label>
                     <textarea  {...register('desc', { required: true })} className="form-control" id="exampleInputPassword1" />
-                    {errors.img && <div id="emailHelp" className="form-text">Không được để trống!</div>}
+                    {errors.desc && <div id="emailHelp" className="form-text">Không được để trống!</div>}
                 </div>
                 <button type="submit" className="btn btn-primary">Thêm</button>
             </form>

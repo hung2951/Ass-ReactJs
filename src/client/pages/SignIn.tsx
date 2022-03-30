@@ -18,13 +18,13 @@ const SignIn = (props: Props) => {
             const { data: user } = await signin(data)
             addLocalstorage(user, () => {
                 if (getLocalstorage().user.role == 1) {
-                    toast.success("Đăng nhập thành công");
+                    toast.success("Đăng nhập thành công, vui lòng đợi giây lát");
                     setTimeout(function () {
                         navigate('/admin')
                     }, 2000)
                 }
                 else {
-                    toast.success("Đăng nhập thành công");
+                    toast.success("Đăng nhập thành công, vui lòng đợi giây lát");
                     setTimeout(function () {
                         navigate('/')
                     }, 2000)

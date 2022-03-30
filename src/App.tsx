@@ -16,7 +16,7 @@ import PrivateRoute from './admin/pages/PrivateRoute'
 import SignIn from './client/pages/SignIn'
 import SignUp from './client/pages/SignUp'
 import Category from './admin/pages/Category'
-import { listCate } from './api/category'
+import { createCate, listCate, removeCate } from './api/category'
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [categories, setCategories] = useState<ProductType[]>([]);
@@ -34,9 +34,14 @@ function App() {
     }
     getCategory()
   }, [])
+  //product
   const onHandleRemove = (id: number) => {
-    remove(id);
-    setProducts(products.filter(item => item._id != id))
+    const confirm = window.confirm('Bạn có muốn xóa không?');
+    if (confirm) {
+      remove(id);
+      setProducts(products.filter(item => item._id != id))
+    }
+
   }
   const onHandleAdd = async (product: any) => {
     const { data } = await create(product);
@@ -46,9 +51,23 @@ function App() {
     const { data } = await update(product);
     setProducts(products.map(item => item._id === data._id ? product : item))
   }
+  // category
+  const onHandleAddCate = async (product: any) => {
+    const { data } = await createCate(product);
+    setCategories([...categories, data])
+  }
+  const onHandleRemoveCate = (id: number) => {
+    const confirm = window.confirm('Bạn có muốn xóa không?');
+    if (confirm) {
+      removeCate(id);
+      setCategories(categories.filter(item => item._id != id))
+    }
+
+  }
   return (
     <div className="App">
       <Routes>
+        {/* client */}
         <Route path='/' element={<Client />}>
           <Route index element={<HomePage products={products} categories={categories} />} />
           <Route path='product'>
@@ -57,17 +76,19 @@ function App() {
           </Route>
 
         </Route>
+        {/* login */}
         <Route path='login' element={<SignIn />} />
         <Route path='signUp' element={<SignUp />} />
+        {/* admin */}
         <Route path='admin' element={<PrivateRoute><Admin /></PrivateRoute>}>
           <Route index element={<DashBoard />} />
           <Route path='product'>
             <Route index element={<ProductManager products={products} onRemove={onHandleRemove} />} />
-            <Route path='add' element={<ProductAdd onAdd={onHandleAdd} />} />
+            <Route path='add' element={<ProductAdd onAdd={onHandleAdd} categories={categories} />} />
             <Route path='edit/:id' element={<ProductEdit onEdit={onHandleEdit} />} />
           </Route>
           <Route path='category'>
-            <Route index element={<Category />} />
+            <Route index element={<Category onAddCate={onHandleAddCate} categories={categories} onRemoveCate={onHandleRemoveCate} />} />
           </Route>
         </Route>
 
