@@ -1,13 +1,16 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import FormSearch from './FormSearch'
 import Logo from './Logo'
 import NavBar from './NavBar'
 import { getLocalstorage } from '../../ultils/localStorage'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 type Props = {}
 
 const Header = (props: Props) => {
-
+    const navigate = useNavigate()
+    const logOut = () => {
+        localStorage.removeItem('user');
+        navigate('/')
+    }
     return (
         <div className="bg-[#5a5a5a]">
             <div className='rounded-b-lg flex justify-evenly w-[1200px] m-auto h-[95px]'>
@@ -30,25 +33,18 @@ const Header = (props: Props) => {
                     {getLocalstorage() ?
                         <div>
                             {getLocalstorage().user.role == 1 ?
-                                <div>
-                                    <Link to="/admin" className='text-white no-underline leading-3'>
-                                        <p className="text-center"><i className="fas fa-user-circle fa-2x" /></p>
-                                        <div>
-                                            <p className="text-center hover:text-[#39ebd07a] duration-300">{getLocalstorage().user.name}</p>
-                                        </div>
-                                    </Link>
-                                    <Link to="">
-                                        <p className='text-base'>Đăng xuất</p>
-                                    </Link>
+                                <div className="dropdown">
+                                    <button className="dropbtn"><i className="fas fa-user-circle fa-2x" /><p>{getLocalstorage().user.name}</p></button>
+                                    <div className="dropdown-content">
+                                        <Link to="/admin">Admin</Link>
+                                        <Link to="#" onClick={() => logOut()}>Đăng xuất</Link>
+                                    </div>
                                 </div>
-                                : <div>
-                                    <Link to="/" className='text-white no-underline leading-3'>
-                                        <p className="text-center"><i className="fas fa-user-circle fa-2x" /></p>
-                                        <div>
-                                            <p className="text-center hover:text-[#39ebd07a] duration-300">{getLocalstorage().user.name}</p>
-                                        </div>
-                                    </Link>
-                                    <p className=''>Đăng xuất</p>
+                                : <div className="dropdown">
+                                    <button className="dropbtn"><i className="fas fa-user-circle fa-2x" /><p>{getLocalstorage().user.name}</p></button>
+                                    <div className="dropdown-content">
+                                        <Link to="#" onClick={() => logOut()}>Đăng xuất</Link>
+                                    </div>
                                 </div>
 
                             }
