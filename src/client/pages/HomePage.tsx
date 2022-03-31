@@ -24,7 +24,7 @@ const HomePage = (props: HomePageProps) => {
                             <div className="group " key={index}>
                                 <Link to={`/product/${product._id}`} className="no-underline">
                                     <div className="card overflow-hidden" >
-                                        <img src={product.img} className="card-img-top mt-3 group-hover:scale-105 duration-300" alt="..." />
+                                        <img src={product.img} className="card-img-top mt-3 group-hover:scale-105 duration-300" />
                                         <div className="card-body text-center">
                                             <h5 className="card-title text-lg text-black">{product.name}</h5>
                                             <p className="card-text text-xl text-red-600 font-bold"> {formatPrice(`${product.price}`)} <u>đ</u></p>

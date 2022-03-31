@@ -12,6 +12,9 @@ const Header = (props: Props) => {
     const logOut = () => {
         localStorage.removeItem('user');
         toast.success("Đã đăng xuất");
+        setTimeout(() => {
+            navigate('/login')
+        }, 1000);
     }
     return (
         <div className="bg-[#5a5a5a]">

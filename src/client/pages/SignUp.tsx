@@ -80,8 +80,6 @@ const SignUp = (props: Props) => {
             </div>
             <ToastContainer />
         </div>
-
-
     )
 }
 
