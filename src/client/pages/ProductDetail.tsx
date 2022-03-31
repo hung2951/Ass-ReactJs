@@ -18,7 +18,7 @@ const ProductDetail = (props: Props) => {
     return (
         <div className="shadow-xl rounded-md">
             <div className="detail w-[1200px] mx-auto mt-5 bg-white rounded-lg px-5 pt-5 pb-10">
-                <div className="border-b pb-4 font-bold text-2xl capitalize">
+                <div className="border-b pb-3 font-bold text-3xl capitalize">
                     <p>{product.name}</p>
                 </div>
                 <div className="grid grid-cols-2 gap-5 pt-5">

@@ -19,7 +19,8 @@ const Category = (props: CategoryProps) => {
     }
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)} className="w-4/6 mx-auto">
+            <h2 className='text-center'>Danh mục</h2>
+            <form onSubmit={handleSubmit(onSubmit)} className="w-4/6 mx-auto ">
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Tên danh mục</label>
                     <input type="text" {...register('name', { required: true })} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
@@ -27,7 +28,7 @@ const Category = (props: CategoryProps) => {
                 </div>
                 <button type="submit" className="btn btn-primary">Thêm</button>
             </form>
-
+            <div className='border-b border-black py-2'></div>
             <div>
                 <table className="table">
                     <tbody>

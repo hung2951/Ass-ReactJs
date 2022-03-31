@@ -11,6 +11,7 @@ type ProductManagerProps = {
 const ProductManager = ({ products, onRemove }: ProductManagerProps) => {
     return (
         <div>
+            <h2 className='text-center'>Danh sách sản phẩm</h2>
             <button type="button" className="inline-flex float-right items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <Link to="/admin/product/add" className='no-underline text-white'>Thêm mới</Link>
             </button>

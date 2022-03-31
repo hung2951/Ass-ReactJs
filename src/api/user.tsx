@@ -10,7 +10,7 @@ export const signup = (user: UserType) => {
     const url = `/signup`;
     return instance.post(url, user);
 }
-export const getUser = (email: UserType) => {
-    const url = `/user/${email}`;
+export const listUser = () => {
+    const url = `/users`;
     return instance.get(url);
 }

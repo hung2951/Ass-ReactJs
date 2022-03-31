@@ -23,7 +23,6 @@ const SignUp = (props: Props) => {
                 setTimeout(function () {
                     navigate('/login')
                 }, 2000)
-
             })
             .catch(res => toast.error("Tài khoản đã tồn tại!"))
     }
@@ -44,20 +43,25 @@ const SignUp = (props: Props) => {
                                     </div>
                                     <div className="">
                                         <label htmlFor="username" className="pl-1 font-bold text-[#1a1a1a]">Họ tên:</label>
-                                        <input {...register('name')} type="text" className="border border-[#ccc] block w-full pl-2 h-10 rounded-sm my-2" placeholder="Họ và tên" />
+                                        <input {...register('name', { required: true })} type="text" className="border border-[#ccc] block w-full pl-2 h-10 rounded-sm my-2" placeholder="Họ và tên" />
+                                        {errors.name && <div className=" text-red-600">Không được để trống!</div>}
                                     </div>
                                     <div>
                                         <label htmlFor="email" className="pl-1  font-bold text-[#1a1a1a]">Địa chỉ email:</label>
-                                        <input {...register('email')} type="email" required className="border border-[#ccc] block w-full pl-2 h-10 rounded-sm my-2" placeholder="Địa chỉ email" />
+                                        <input {...register('email', { required: true })} type="email" className="border border-[#ccc] block w-full pl-2 h-10 rounded-sm my-2" placeholder="Địa chỉ email" />
+                                        {errors.email && <div className=" text-red-600">Không được để trống!</div>}
                                     </div>
                                     <div>
                                         <label htmlFor="password" className="pl-1  font-bold text-[#1a1a1a]">Mật khẩu:</label>
-                                        <input {...register('password')} type="password" required className="border border-[#ccc] block w-full pl-2 h-10 rounded-sm my-2" placeholder="Mật khẩu" />
+                                        <input {...register('password', { required: true })} type="password" className="border border-[#ccc] block w-full pl-2 h-10 rounded-sm my-2" placeholder="Mật khẩu" />
+                                        {errors.password && <div className=" text-red-600">Không được để trống!</div>}
+
                                     </div>
-                                    <div>
+                                    {/* <div>
                                         <label htmlFor="rePassword" className="pl-1  font-bold text-[#1a1a1a]">Nhập lại mật khẩu:</label>
                                         <input type="password" className="border border-[#ccc] block w-full pl-2 h-10 rounded-sm my-2" placeholder="Nhập lại mật khẩu" />
-                                    </div>
+                                        {errors.name && <div className=" text-red-600">Không được để trống!</div>}
+                                    </div> */}
                                 </div>
                                 <div className="hidden justify-evenly ">
                                     <label><input type="radio"{...register('role')} defaultValue={0} defaultChecked /> Khách hàng</label>

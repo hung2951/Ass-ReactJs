@@ -18,9 +18,13 @@ import SignUp from './client/pages/SignUp'
 import Category from './admin/pages/Category'
 import { createCate, listCate, removeCate } from './api/category'
 import ProductCate from './client/pages/ProductCate'
+import User from './admin/pages/User'
+import { listUser } from './api/user'
+import { UserType } from './types/user'
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [categories, setCategories] = useState<ProductType[]>([]);
+  const [users, setUsers] = useState<UserType[]>([]);
   useEffect(() => {
     // sản phẩm
     const getProduct = async () => {
@@ -33,7 +37,13 @@ function App() {
       const { data } = await listCate();
       setCategories(data)
     }
-    getCategory()
+    getCategory();
+    // user
+    const getUser = async () => {
+      const { data } = await listUser();
+      setUsers(data)
+    }
+    getUser()
   }, [])
   //product
   const onHandleRemove = (id: number) => {
@@ -91,6 +101,7 @@ function App() {
           <Route path='category'>
             <Route index element={<Category onAddCate={onHandleAddCate} categories={categories} onRemoveCate={onHandleRemoveCate} />} />
           </Route>
+          <Route path='user' element={<User users={users} />} />
         </Route>
 
       </Routes>
