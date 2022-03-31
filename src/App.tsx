@@ -17,6 +17,7 @@ import SignIn from './client/pages/SignIn'
 import SignUp from './client/pages/SignUp'
 import Category from './admin/pages/Category'
 import { createCate, listCate, removeCate } from './api/category'
+import ProductCate from './client/pages/ProductCate'
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [categories, setCategories] = useState<ProductType[]>([]);
@@ -74,7 +75,7 @@ function App() {
             <Route index element={<ProductPage products={products} />} />
             <Route path=':id' element={<ProductDetail />} />
           </Route>
-
+          <Route path='danh-muc/:id' element={<ProductCate categories={categories} />} />
         </Route>
         {/* login */}
         <Route path='login' element={<SignIn />} />

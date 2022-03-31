@@ -12,12 +12,13 @@ const Category = ({ categories }: CategoryProps) => {
             <p className='text-center pt-4 font-bold text-xl'>Danh mục</p>
             <div>
                 {categories.map((item, index) => {
+
                     return (
-                        <Link to={`danh-muc/${item._id}`} className='text-black no-underline' key={index}>
+                        <a href={`/danh-muc/${item._id}`} className='text-black no-underline' key={index}>
                             <label className="border-b w-11/12 ml-3 border-gray-400 py-2 pl-3 hover:text-gray-500 hover:border-b hover:border-black hover:w-10/12 duration-300">
                                 {item.name}
                             </label>
-                        </Link>
+                        </a>
                     )
                 })}
 
