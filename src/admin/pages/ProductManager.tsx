@@ -5,7 +5,7 @@ import { formatPrice } from '../../ultils/FormatPrice'
 
 type ProductManagerProps = {
     products: ProductType[];
-    onRemove: (_id: number) => void
+    onRemove: (id: number) => void
 }
 
 const ProductManager = ({ products, onRemove }: ProductManagerProps) => {
@@ -25,7 +25,7 @@ const ProductManager = ({ products, onRemove }: ProductManagerProps) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {products?.map((item, index) => {
+                    {products?.sort((a, b) => a.price > b.price ? 1 : -1).map((item, index) => {
                         return (
                             <tr key={index}>
                                 <th scope="row">{index + 1}</th>

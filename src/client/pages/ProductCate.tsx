@@ -16,11 +16,11 @@ const ProductCate = (props: ProductCateProps) => {
     useEffect(() => {
         const getProduct = async () => {
             const { data } = await cateProduct(id)
-            const nameCate = data.category.name;
-            console.log(nameCate);
             setProduct(data.products)
+
         }
         getProduct();
+
     }, [])
     return (
         <div className='flex w-full mt-3'>

@@ -18,9 +18,8 @@ const ProductAdd = (props: ProductAddProps) => {
     const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
     const navigate = useNavigate()
     const onSubmit: SubmitHandler<FormInputs> = (data) => {
-        props.onAdd(data);
+        props.onAdd(data)
         navigate('/admin/product');
-
     }
 
     return (
@@ -38,14 +37,15 @@ const ProductAdd = (props: ProductAddProps) => {
                     {errors.price && <div id="emailHelp" className="form-text">Không được để trống!</div>}
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="price" className="form-label">Ảnh</label>
+                    <label htmlFor="img" className="form-label">Ảnh</label>
                     <input type="text" {...register('img', { required: true })} className="form-control" id="exampleInputPassword1" />
+                    {/* <input type="file"{...register('img', { required: true })} /> */}
                     {errors.img && <div id="emailHelp" className="form-text">Không được để trống!</div>}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="price" className="form-label">Danh mục</label>
                     <select {...register('category')} className='w-full border border-black rounded-md h-10'>
-                        {props.categories?.map(item => <option value={item._id}>{item.name}</option>)}
+                        {props.categories?.map(item => <option key={item._id} value={item._id}>{item.name}</option>)}
                     </select>
                 </div>
 

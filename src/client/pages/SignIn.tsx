@@ -1,12 +1,12 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
-import { getUser, signin } from '../../api/user'
+import { signin } from '../../api/user'
 import { addLocalstorage, getLocalstorage } from '../../ultils/localStorage'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 type Props = {}
 type FormInputs = {
-    email: string,
+    email: string;
     password: string
 }
 const SignIn = (props: Props) => {
@@ -42,9 +42,11 @@ const SignIn = (props: Props) => {
                 {/* Replace with your content */}
                 <div className="px-4 pt-6 sm:px-0">
                     <div className="min-h-full grid grid-cols-2 px-4 sm:px-6 lg:px-8">
-                        <div>
-                            <img src="https://picsum.photos/700/800" />
-                        </div>
+                        <Link to="/">
+                            <div>
+                                <img src="https://picsum.photos/700/800" />
+                            </div>
+                        </Link>
                         <div className="w-full space-y-8 bg-white bg-opacity-50">
                             <form className="max-w-sm space-y-6 mx-auto pt-20 " onSubmit={handleSubmit(onSubmit)}>
                                 <div className="rounded-md shadow-sm -space-y-px">
@@ -53,11 +55,13 @@ const SignIn = (props: Props) => {
                                     </div>
                                     <div>
                                         <label htmlFor="email" className="pl-1 font-bold text-[#1a1a1a]">Địa chỉ email:</label>
-                                        <input id="email" {...register('email')} name="email" type="email" className="border border-[#ccc] block w-full pl-2 h-10 rounded-sm my-2" placeholder="Địa chỉ email" />
+                                        <input id="email" {...register('email', { required: true })} name="email" type="email" className="border border-[#ccc] block w-full pl-2 h-10 rounded-sm my-2" placeholder="Địa chỉ email" />
+                                        {errors.email && <p className='text-red-600'>Không được để trống!</p>}
                                     </div>
                                     <div>
                                         <label htmlFor="password" className="pl-1 font-bold text-[#1a1a1a]">Mật khẩu:</label>
-                                        <input id="password" {...register('password')} name="password" type="password" className="border border-[#ccc] block w-full pl-2 h-10 rounded-sm my-2" placeholder="Mật khẩu" />
+                                        <input id="password" {...register('password', { required: true })} name="password" type="password" className="border border-[#ccc] block w-full pl-2 h-10 rounded-sm my-2" placeholder="Mật khẩu" />
+                                        {errors.password && <p className='text-red-600'>Không được để trống!</p>}
                                     </div>
                                 </div>
                                 <div className="flex items-center justify-between">

@@ -19,7 +19,7 @@ const User = ({ users }: UserProps) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {users?.map((item, index) => {
+                    {users?.sort((a, b) => a.role < b.role ? 1 : -1).map((item, index) => {
                         return (
                             <tr key={index}>
                                 <th scope="row">{index + 1}</th>
