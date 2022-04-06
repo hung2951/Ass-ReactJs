@@ -5,7 +5,9 @@ import NavBar from './NavBar'
 import { getLocalstorage } from '../../ultils/localStorage'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-type Props = {}
+type Props = {
+    search: (keyword: string) => void
+}
 
 const Header = (props: Props) => {
     const navigate = useNavigate()
@@ -21,7 +23,7 @@ const Header = (props: Props) => {
             <div className='rounded-b-lg flex justify-evenly w-[1200px] m-auto h-[95px]'>
                 {<Logo />}
 
-                {<FormSearch />}
+                {<FormSearch onSearch={props.search} />}
 
                 <div className="phone-sp flex border-r-2 mt-3 px-10 max-h-[60px]">
                     <p><i className="fas fa-phone-alt text-white px-3 pt-3 fa-2x" /></p>

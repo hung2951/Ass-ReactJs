@@ -28,3 +28,7 @@ export const update = (product: ProductType) => {
     const url = `/api/product/${product._id}`;
     return instance.put(url, product)
 }
+export const search = (keyword: any) => {
+    const url = `/api/search?q=${keyword}`;
+    return instance.get(url)
+}

@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import HomePage from './client/pages/HomePage'
 import Client from './client/layouts/ClientLayout'
 import { ProductType } from './types/product'
-import { create, list, remove, update } from './api/product'
+import { create, list, remove, search, update } from './api/product'
 import DashBoard from './admin/pages/DashBoard'
 import Admin from './admin/layouts/AdminLayout'
 import ProductManager from './admin/pages/ProductManager'
@@ -21,10 +21,12 @@ import ProductCate from './client/pages/ProductCate'
 import User from './admin/pages/User'
 import { listUser } from './api/user'
 import { UserType } from './types/user'
+import ProductSearch from './client/pages/ProductSearch'
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [categories, setCategories] = useState<ProductType[]>([]);
   const [users, setUsers] = useState<UserType[]>([]);
+  const [searchProduct, setsearchProduct] = useState<ProductType[]>([]);
   useEffect(() => {
     // sản phẩm
     const getProduct = async () => {
@@ -75,21 +77,31 @@ function App() {
     }
 
   }
+  //search 
+  const onhandleSearch = async (keyword: string) => {
+    const { data } = await search(keyword)
+    setsearchProduct(data)
+
+  }
   return (
     <div className="App">
       <Routes>
         {/* client */}
-        <Route path='/' element={<Client />}>
+        <Route path='/' element={<Client searchProduct={onhandleSearch} />}>
           <Route index element={<HomePage products={products} categories={categories} />} />
           <Route path='product'>
             <Route index element={<ProductPage products={products} />} />
             <Route path=':id' element={<ProductDetail />} />
           </Route>
+          {/* category */}
           <Route path='danh-muc/:id' element={<ProductCate categories={categories} />} />
+          {/* search */}
+          <Route path='search' element={<ProductSearch products={searchProduct} />} />
         </Route>
         {/* login */}
         <Route path='login' element={<SignIn />} />
         <Route path='signUp' element={<SignUp />} />
+
         {/* admin */}
         <Route path='admin' element={<PrivateRoute><Admin /></PrivateRoute>}>
           <Route index element={<DashBoard />} />

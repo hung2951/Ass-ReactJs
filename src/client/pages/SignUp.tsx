@@ -15,7 +15,6 @@ const SignUp = (props: Props) => {
     const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
     const navigate = useNavigate()
     const onSubmit: SubmitHandler<FormInputs> = data => {
-        console.log(data);
 
         signup(data)
             .then(res => {
