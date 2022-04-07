@@ -5,14 +5,15 @@ import { ProductType } from '../../types/product'
 
 type Props = {
     products: ProductType[],
+    keyword: string,
 }
 
 const ProductSearch = (props: Props) => {
-    console.log(props.products);
+    console.log(props.keyword);
 
     return (
         <div>
-            <h2>Sản phẩm tìm kiếm với từ khóa: </h2>
+            <h2 className='text-center py-3'>Sản phẩm tìm kiếm với từ khóa "{props.keyword}" </h2>
             <div className='grid grid-cols-4 mt-2 gap-4'>
                 {props.products.map((product, index) => {
                     return (

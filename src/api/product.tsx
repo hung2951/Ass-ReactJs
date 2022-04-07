@@ -21,14 +21,24 @@ export const getOne = (id: any) => {
     return instance.get(url)
 }
 export const remove = (id: number) => {
-    const url = `/api/product/${id}`;
-    return instance.delete(url)
+    const { token, user } = getLocalstorage()
+    const url = `/api/product/${id}/${user._id}`;
+    return instance.delete(url, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    })
 }
 export const update = (product: ProductType) => {
-    const url = `/api/product/${product._id}`;
-    return instance.put(url, product)
+    const { token, user } = getLocalstorage()
+    const url = `/api/product/${product._id}/${user._id}`;
+    return instance.put(url, product, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    })
 }
 export const search = (keyword: any) => {
     const url = `/api/search?q=${keyword}`;
-    return instance.get(url)
+    return instance.post(url)
 }

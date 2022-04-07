@@ -27,6 +27,7 @@ function App() {
   const [categories, setCategories] = useState<ProductType[]>([]);
   const [users, setUsers] = useState<UserType[]>([]);
   const [searchProduct, setsearchProduct] = useState<ProductType[]>([]);
+  const [keyword, setKeyword] = useState();
   useEffect(() => {
     // sản phẩm
     const getProduct = async () => {
@@ -81,7 +82,7 @@ function App() {
   const onhandleSearch = async (keyword: string) => {
     const { data } = await search(keyword)
     setsearchProduct(data)
-
+    setKeyword(keyword)
   }
   return (
     <div className="App">
@@ -96,7 +97,7 @@ function App() {
           {/* category */}
           <Route path='danh-muc/:id' element={<ProductCate categories={categories} />} />
           {/* search */}
-          <Route path='search' element={<ProductSearch products={searchProduct} />} />
+          <Route path='search' element={<ProductSearch products={searchProduct} keyword={keyword} />} />
         </Route>
         {/* login */}
         <Route path='login' element={<SignIn />} />
