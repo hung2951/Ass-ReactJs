@@ -9,8 +9,6 @@ type Props = {
 }
 
 const ProductSearch = (props: Props) => {
-    console.log(props.keyword);
-
     return (
         <div>
             <h2 className='text-center py-3'>Sản phẩm tìm kiếm với từ khóa "{props.keyword}" </h2>

@@ -27,7 +27,7 @@ function App() {
   const [categories, setCategories] = useState<ProductType[]>([]);
   const [users, setUsers] = useState<UserType[]>([]);
   const [searchProduct, setsearchProduct] = useState<ProductType[]>([]);
-  const [keyword, setKeyword] = useState();
+  const [keyword, setKeyword] = useState<string>();
   useEffect(() => {
     // sản phẩm
     const getProduct = async () => {
