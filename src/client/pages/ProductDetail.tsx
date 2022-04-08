@@ -3,7 +3,9 @@ import { useParams } from 'react-router-dom'
 import { getOne } from '../../api/product';
 import { ProductType } from '../../types/product';
 import { formatPrice } from '../../ultils/FormatPrice'
-type Props = {}
+type Props = {
+    onAddToCart: (id: number) => void
+}
 
 const ProductDetail = (props: Props) => {
     const { id } = useParams();
@@ -63,7 +65,7 @@ const ProductDetail = (props: Props) => {
                                 <a >Xem tại đây</a> </span>]</p>
                         </div>
                         <div className="mt-5 grid grid-cols-2 gap-1 text-center">
-                            <button id="btnAddToCart" className="h-14 bg-red-600 hover:bg-red-700 text-white rounded-sm leading-10 uppercase font-bold"><a>Mua ngay</a></button>
+                            <button onClick={() => props.onAddToCart(product._id)} className="h-14 bg-red-600 hover:bg-red-700 text-white rounded-sm leading-10 uppercase font-bold"><a>Mua ngay</a></button>
                             <button className="h-14 bg-[#f28902] hover:bg-[#f29202f5] text-white rounded-sm leading-10 uppercase font-bold"><a>Mua trả góp 0%</a></button>
                         </div>
                     </div>

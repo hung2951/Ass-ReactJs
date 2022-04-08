@@ -38,7 +38,7 @@ const Category = (props: CategoryProps) => {
                                     <th scope="row">{index + 1}</th>
                                     <td className="flex">{item.name}</td>
                                     <td>
-                                        <button onClick={() => props.onRemoveCate(item._id)}>remove</button>
+                                        <button onClick={() => props.onRemoveCate(item._id)} className='hover:underline'>remove</button>
                                     </td>
                                 </tr>
                             )

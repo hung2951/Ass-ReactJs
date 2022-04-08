@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import HomePage from './client/pages/HomePage'
 import Client from './client/layouts/ClientLayout'
 import { ProductType } from './types/product'
-import { create, list, remove, search, update } from './api/product'
+import { create, getOne, list, remove, search, update } from './api/product'
 import DashBoard from './admin/pages/DashBoard'
 import Admin from './admin/layouts/AdminLayout'
 import ProductManager from './admin/pages/ProductManager'
@@ -22,11 +22,16 @@ import User from './admin/pages/User'
 import { listUser } from './api/user'
 import { UserType } from './types/user'
 import ProductSearch from './client/pages/ProductSearch'
+import { addToCart, decrease, increase, removeCart } from './ultils/cart'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Cart from './client/pages/Cart'
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [categories, setCategories] = useState<ProductType[]>([]);
   const [users, setUsers] = useState<UserType[]>([]);
   const [searchProduct, setsearchProduct] = useState<ProductType[]>([]);
+  const [cart, setCart] = useState<ProductType[]>([]);
   const [keyword, setKeyword] = useState<string>();
   useEffect(() => {
     // sản phẩm
@@ -84,6 +89,28 @@ function App() {
     setsearchProduct(data)
     setKeyword(keyword)
   }
+  //cart
+  const onHandleAddToCart = async (id: number) => {
+    const { data } = await getOne(id);
+    addToCart({ ...data, quantity: 1 }, () => {
+      toast.success(`Đã thêm ${data.name} vào giỏ hàng!`)
+    })
+  }
+  const onHandleIncrease = (id: number) => {
+    increase(id, () => {
+      setCart(JSON.parse(localStorage.getItem('cart') as string))
+    })
+  }
+  const onHandleDecrease = (id: number) => {
+    decrease(id, () => {
+      setCart(JSON.parse(localStorage.getItem('cart') as string))
+    })
+  }
+  const onHandleRemoveCart = (id: number) => {
+    removeCart(id, () => {
+      setCart(JSON.parse(localStorage.getItem('cart') as string))
+    })
+  }
   return (
     <div className="App">
       <Routes>
@@ -92,13 +119,16 @@ function App() {
           <Route index element={<HomePage products={products} categories={categories} />} />
           <Route path='product'>
             <Route index element={<ProductPage products={products} />} />
-            <Route path=':id' element={<ProductDetail />} />
+            <Route path=':id' element={<ProductDetail onAddToCart={onHandleAddToCart} />} />
           </Route>
           {/* category */}
           <Route path='danh-muc/:id' element={<ProductCate categories={categories} />} />
           {/* search */}
           <Route path='search' element={<ProductSearch products={searchProduct} keyword={keyword} />} />
+          {/* cart */}
+          <Route path='cart' element={<Cart onIncrease={onHandleIncrease} onDecrease={onHandleDecrease} onRemoveCart={onHandleRemoveCart} />} />
         </Route>
+        {/* end client */}
         {/* login */}
         <Route path='login' element={<SignIn />} />
         <Route path='signUp' element={<SignUp />} />
@@ -118,6 +148,8 @@ function App() {
         </Route>
 
       </Routes>
+      <ToastContainer />
+
     </div>
   )
 }
