@@ -3,7 +3,7 @@ if (localStorage.getItem('cart')) {
     cart = JSON.parse(localStorage.getItem('cart') as string);
 }
 
-export const addToCart = (newProduct: any[], next: () => void) => {
+export const addToCart = (newProduct: any, next: () => void) => {
     const existProduct = cart.find(product => product._id === newProduct._id);
     if (!existProduct) {
         cart.push(newProduct);

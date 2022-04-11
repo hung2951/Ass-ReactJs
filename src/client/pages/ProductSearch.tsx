@@ -1,19 +1,31 @@
-import React from 'react'
-import { Link, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { formatPrice } from '../../ultils/FormatPrice'
 import { ProductType } from '../../types/product'
+import { search } from '../../api/product';
 
 type Props = {
-    products: ProductType[],
-    keyword: string,
+
 }
 
 const ProductSearch = (props: Props) => {
+    const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const [products, setProducts] = useState<ProductType[]>([])
+
+    useEffect(() => {
+        const searchProduct = async () => {
+            const { data } = await search(searchParams.get("q"))
+            setProducts(data);
+
+        }
+        searchProduct();
+    }, [searchParams])
     return (
         <div>
-            <h2 className='text-center py-3'>Sản phẩm tìm kiếm với từ khóa "{props.keyword}" </h2>
+            <h2 className='text-center py-3'>Sản phẩm tìm kiếm với từ khóa "{searchParams.get("q")}"</h2>
             <div className='grid grid-cols-4 mt-2 gap-4'>
-                {props.products.map((product, index) => {
+                {products.map((product, index) => {
                     return (
                         <div className="group " key={index}>
                             <Link to={`/product/${product._id}`} className="no-underline">

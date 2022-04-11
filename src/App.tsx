@@ -30,9 +30,7 @@ function App() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [categories, setCategories] = useState<ProductType[]>([]);
   const [users, setUsers] = useState<UserType[]>([]);
-  const [searchProduct, setsearchProduct] = useState<ProductType[]>([]);
   const [cart, setCart] = useState<ProductType[]>([]);
-  const [keyword, setKeyword] = useState<string>();
   useEffect(() => {
     // sản phẩm
     const getProduct = async () => {
@@ -83,12 +81,6 @@ function App() {
     }
 
   }
-  //search 
-  const onhandleSearch = async (keyword: string) => {
-    const { data } = await search(keyword)
-    setsearchProduct(data)
-    setKeyword(keyword)
-  }
   //cart
   const onHandleAddToCart = async (id: number) => {
     const { data } = await getOne(id);
@@ -115,7 +107,7 @@ function App() {
     <div className="App">
       <Routes>
         {/* client */}
-        <Route path='/' element={<Client searchProduct={onhandleSearch} />}>
+        <Route path='/' element={<Client />}>
           <Route index element={<HomePage products={products} categories={categories} />} />
           <Route path='product'>
             <Route index element={<ProductPage products={products} />} />
@@ -124,7 +116,7 @@ function App() {
           {/* category */}
           <Route path='danh-muc/:id' element={<ProductCate categories={categories} />} />
           {/* search */}
-          <Route path='search' element={<ProductSearch products={searchProduct} keyword={keyword} />} />
+          <Route path='search' element={<ProductSearch />} />
           {/* cart */}
           <Route path='cart' element={<Cart onIncrease={onHandleIncrease} onDecrease={onHandleDecrease} onRemoveCart={onHandleRemoveCart} />} />
         </Route>

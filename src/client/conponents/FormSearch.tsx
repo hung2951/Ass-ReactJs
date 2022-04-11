@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { search } from '../../api/product'
 type Props = {
-    onSearch: (keyword: string) => void
+
 }
 type FormInputs = {
     q: string
@@ -12,7 +12,6 @@ const FormSearch = (props: Props) => {
     const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
     const navigate = useNavigate()
     const onSubmit: SubmitHandler<FormInputs> = data => {
-        props.onSearch(data.q)
         navigate(`/search?q=${data.q}`)
         // navigate('/admin/product');
         // console.log(data);
